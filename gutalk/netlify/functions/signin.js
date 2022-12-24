@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+let fetch = require('node-fetch');
 
 const API_ENDPOINT = 'https://github.com/login/oauth/access_token';
 const CLIENT_ID = '10563cad7a654a79848c';
