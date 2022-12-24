@@ -16,7 +16,7 @@ exports.handler = async (event, context) => {
         });
         return {
             statusCode: response.status,
-            body: await response.json(),
+            body: await response.text(),
             headers: {
                 'Content-Type': 'application/json'
             }
