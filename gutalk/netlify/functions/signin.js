@@ -8,13 +8,14 @@ console.log(`Get secret: ${CLIENT_SECRET}`);
 
 exports.handler = async (event, context) => {
     try {
-        let response = await fetch(API_ENDPOINT, {
-            method: 'POST',
-            body: `client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${event.queryStringParameters.code}`,
-            headers: {
-                'accept': 'application/json'
-            }
-        });
+        let response = await fetch(
+            `${API_ENDPOINT}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${event.queryStringParameters.code}`,
+            {
+                method: 'POST',
+                headers: {
+                    'accept': 'application/json'
+                }
+            });
         return {
             statusCode: response.status,
             body: await response.text(),
