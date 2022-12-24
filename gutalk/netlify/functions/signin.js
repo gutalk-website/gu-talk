@@ -11,15 +11,13 @@ exports.handler = async (event, context) => {
             method: 'POST',
             body: `client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${event.queryStringParameters.code}`,
             headers: {
-                accept: 'application/json'
+                'accept': 'application/json'
             }
         });
     } catch (err) {
         return {
             statusCode: err.statusCode || 500,
-            body: JSON.stringify({
-                error: err.message
-            })
+            body: JSON.stringify(err)
         };
     }
     return {
