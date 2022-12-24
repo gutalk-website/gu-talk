@@ -14,17 +14,17 @@ exports.handler = async (event, context) => {
                 'accept': 'application/json'
             }
         });
+        return {
+            statusCode: response.status,
+            body: await response.json(),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
     } catch (err) {
         return {
             statusCode: err.statusCode || 500,
             body: JSON.stringify(err)
         };
     }
-    return {
-        statusCode: 200,
-        body: JSON.stringify(response),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    };
 }
