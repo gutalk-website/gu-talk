@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 const API_ENDPOINT = 'https://github.com/login/oauth/access_token';
-const CLIENT_ID = '10563cad7a654a79848c';
+const CLIENT_ID = '592223f26d426d6b7141';
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
 console.log(`Get secret: ${CLIENT_SECRET}`);
