@@ -4,10 +4,11 @@ const API_ENDPOINT = 'https://github.com/login/oauth/access_token';
 const CLIENT_ID = '10563cad7a654a79848c';
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
+console.log(`Get secret: ${CLIENT_SECRET}`);
+
 exports.handler = async (event, context) => {
-    let response;
     try {
-        response = await fetch(API_ENDPOINT, {
+        let response = await fetch(API_ENDPOINT, {
             method: 'POST',
             body: `client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${event.queryStringParameters.code}`,
             headers: {
