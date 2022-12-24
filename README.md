@@ -1,2 +1,3 @@
-# gu-talk
- An experimental project
+# guTalk
+
+An experimental project
