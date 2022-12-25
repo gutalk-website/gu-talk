@@ -14,7 +14,7 @@ const app = Vue.createApp({
             axios('https://api.github.com/user', {
                 headers: { 'Authorization': this.accessToken }
             }).then((res) => {
-                axios.defaults.headers['Authorization'] = this.accessToken;
+                axios.defaults.headers.common['Authorization'] = this.accessToken;
                 this.isLogin = true;
             }).catch(function (err) {
                 localStorage.removeItem('github-token');
