@@ -1,1 +1,54 @@
-1145
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.45/vue.global.prod.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-plus/2.2.27/index.full.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/element-plus/2.2.27/index.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <title>GuTalk</title>
+</head>
+
+<body>
+    <div id="app">
+        <el-button @click="showLoginDialog=true">登录</el-button>
+        <el-dialog v-model="showLoginDialog" title="登录须知" center>
+            <span>
+                登录GuTalk需要通过OAuth方式使用你的Github账户。<br>
+                如果你确认登录，将弹出一个新的标签页，点击 Authorize 以同意GuTalk使用你的账户。<br>
+                请确认下方的 Authorizing will redirect to 为Gutalk的网站以防止第三方盗用你的账户。<br>
+                接着页面将跳转，请等待标签自动关闭，即可完成登录。<br>
+            </span>
+            <template #footer>
+                <el-button @click="showLoginDialog=false">取消</el-button>
+                <el-button type="primary" @click="login">登录</el-button>
+            </template>
+        </el-dialog>
+    </div>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    showLoginDialog: false
+                }
+            },
+            methods: {
+                login() {
+                    showLoginDialog = false;
+                    let win = window.open('https://github.com/login/oauth/authorize?client_id=592223f26d426d6b7141&scope=public_repo');
+                    let loop = setInterval(function () {
+                        if (win && win.closed) {
+                            reload();
+                            clearInterval(loop);
+                        }
+                    }, 300);
+                }
+            }
+        });
+        app.use(ElementPlus);
+        app.mount('#app');
+    </script>
+</body>
+
+</html>
