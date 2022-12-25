@@ -11,15 +11,15 @@ const app = Vue.createApp({
     },
     mounted() {
         if (this.accessToken != undefined) {
-            axios.get('https://api.github.com/user')
-                .then((res) => {
-                    axios.defaults.headers['Authorization'] = this.accessToken;
-                    this.isLogin = true;
-                }).catch(function (err) {
-                    localStorage.removeItem('github-token');
-                    ElementPlus.ElMessage.error(`登录信息无效：${err}`);
-                    location.reload();
-                });
+            axios('https://api.github.com/user', {
+                headers: { 'Authorization': this.accessToken }
+            }).then((res) => {
+                axios.defaults.headers['Authorization'] = this.accessToken;
+                this.isLogin = true;
+            }).catch(function (err) {
+                localStorage.removeItem('github-token');
+                ElementPlus.ElMessage.error(`登录信息无效：${err}`);
+            });
         }
     },
     methods: {
