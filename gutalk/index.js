@@ -28,14 +28,13 @@ const app = Vue.createApp({
             let win = window.open('https://github.com/login/oauth/authorize?client_id=592223f26d426d6b7141&scope=public_repo');
             let loop = setInterval(function () {
                 if (win && win.closed) {
-                    location.reload();
                     clearInterval(loop);
+                    location.reload();
                 }
             }, 300);
-            this.getPage();
         },
         getPage() {
-            axios.get(`https://api.github.com/repos/gutalk-website/gu-talk/issues?state=open&per_page=10&page=${this.currentPage}`)
+            axios.get(`https://api.github.com/repos/gutalk-website/issue-repo/issues?state=open&per_page=10&page=${this.currentPage}`)
                 .then((res) => {
                     this.list = this.list.concat(res.data);
                 }).catch(function (err) {
