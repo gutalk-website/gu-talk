@@ -2,9 +2,9 @@
 const app = Vue.createApp({
     data() {
         return {
+            inited: false,
             showLoginDialog: false,
             isLogin: false,
-            accessToken: localStorage.getItem('github-token'),
             currentPage: 1,
             list: []
         }
@@ -15,9 +15,11 @@ const app = Vue.createApp({
                 headers: { 'Authorization': this.accessToken }
             }).then((res) => {
                 axios.defaults.headers.common['Authorization'] = this.accessToken;
+                this.inited = true;
                 this.isLogin = true;
             }).catch(function (err) {
                 localStorage.removeItem('github-token');
+                this.inited = true;
                 ElementPlus.ElMessage.error(`登录信息无效：${err}`);
             });
         }
@@ -34,12 +36,14 @@ const app = Vue.createApp({
             }, 300);
         },
         getPage() {
-            axios.get(`https://api.github.com/repos/gutalk-website/issue-repo/issues?state=open&per_page=10&page=${this.currentPage}`)
-                .then((res) => {
-                    this.list = this.list.concat(res.data);
-                }).catch(function (err) {
-                    ElementPlus.ElMessage.error(`获取列表失败：${err}`);
-                });
+            if (this.inited) {
+                axios.get(`https://api.github.com/repos/gutalk-website/issue-repo/issues?state=open&per_page=10&page=${this.currentPage}`)
+                    .then((res) => {
+                        this.list = this.list.concat(res.data);
+                    }).catch(function (err) {
+                        ElementPlus.ElMessage.error(`获取列表失败：${err}`);
+                    });
+            }
         }
     }
 });
