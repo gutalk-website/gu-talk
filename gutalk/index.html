@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%; margin: 0px; overflow: hidden;">
 
 <head>
     <meta charset="utf-8">
@@ -11,14 +11,44 @@
 </head>
 
 <body>
-    <div id="app">
-        <el-button @click="showLoginDialog=true">登录</el-button>
+    <div id="app" style="height: 100vh;">
+        <el-container style="height: 100%;">
+            <el-header style="margin-top: 3%; margin-left: 15%; margin-right: 15%;">
+                <el-image style="height: 100%;" src="img/gutalk.gif"></el-image>
+            </el-header>
+            <el-main style="margin-bottom: 5%; margin-left: 15%; margin-right: 15%; height: 100%;">
+                <el-row :gutter="10" style="height: 100%;">
+                    <el-col :span="18" style="height: 100%;">
+                        <el-scrollbar style="height: 100%;">
+                            <div style="padding: 1px; padding-right: 20.5px;">
+                                <el-alert type="warning" show-icon title="GuTalk 正在测试中" style="margin: 10px;">
+                                    可能出现奇奇怪怪的错误，如果发现，请及时向我们汇报！
+                                </el-alert>
+                            </div>
+                            <div v-infinite-scroll="getPage">
+                                <el-card shadow="hover" style="margin: 10px;" v-for="i in list">
+                                    <template #header> {{ i.title }} </template>
+                                </el-card>
+                            </div>
+                        </el-scrollbar>
+                    </el-col>
+                    <el-col :span="6">
+                        <el-card shadow="hover" style="margin: 10px;">
+                            <el-alert title="你还没有登录" show-icon style="margin-bottom: 10px;">
+                                登录以获取更好的体验
+                            </el-alert>
+                            <el-button @click="showLoginDialog=true" size="large" style="width: 100%;">登录</el-button>
+                        </el-card>
+                    </el-col>
+                </el-row>
+            </el-main>
+        </el-container>
         <el-dialog v-model="showLoginDialog" title="登录须知" center>
             <span>
                 登录GuTalk需要通过OAuth方式使用你的Github账户。<br>
                 如果你确认登录，将弹出一个新的标签页，点击 Authorize 以同意GuTalk使用你的账户。<br>
                 请确认下方的 Authorizing will redirect to 为Gutalk的网站以防止第三方盗用你的账户。<br>
-                接着页面将跳转，请等待标签自动关闭，即可完成登录。<br>
+                接着页面将跳转，请等待标签页自动关闭，即可完成登录。<br>
             </span>
             <template #footer>
                 <el-button @click="showLoginDialog=false">取消</el-button>
@@ -26,29 +56,7 @@
             </template>
         </el-dialog>
     </div>
-    <script>
-        const app = Vue.createApp({
-            data() {
-                return {
-                    showLoginDialog: false
-                }
-            },
-            methods: {
-                login() {
-                    showLoginDialog = false;
-                    let win = window.open('https://github.com/login/oauth/authorize?client_id=592223f26d426d6b7141&scope=public_repo');
-                    let loop = setInterval(function () {
-                        if (win && win.closed) {
-                            reload();
-                            clearInterval(loop);
-                        }
-                    }, 300);
-                }
-            }
-        });
-        app.use(ElementPlus);
-        app.mount('#app');
-    </script>
+    <script src="index.js"></script>
 </body>
 
 </html>
