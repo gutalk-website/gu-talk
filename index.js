@@ -2,12 +2,14 @@ const accessToken = localStorage.getItem('github-token');
 if (accessToken != undefined) {
     axios.defaults.headers.common['Authorization'] = accessToken;
 }
-const app = Vue.createApp({
+const app = Vue.createApp({});
+app.use(ElementPlus);
+app.component('gutalk-index', {
     data() {
         return {
             showLoginDialog: false,
             isLogin: accessToken != undefined,
-            user: {},
+            user: false,
             currentPage: 1,
             loadPage: false,
             stopPage: false,
@@ -16,11 +18,13 @@ const app = Vue.createApp({
     },
     mounted() {
         if (accessToken != undefined) {
-            axios('https://api.github.com/user').then((res) => {
+            axios.get('https://api.github.com/user').then((res) => {
                 this.user = res.data;
                 this.isLogin = true;
             }).catch((err) => {
                 this.isLogin = false;
+                localStorage.removeItem('github-token');
+                delete axios.defaults.headers.common['Authorization'];
                 ElementPlus.ElMessage.error(`登录信息无效：${err}`);
             });
         }
@@ -60,7 +64,7 @@ const app = Vue.createApp({
                     });
             }
         }
-    }
-});
-app.use(ElementPlus);
+    },
+    template: '#index'
+})
 app.mount('#app');

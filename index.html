@@ -13,6 +13,9 @@
 
 <body>
     <div id="app" style="height: 100vh;">
+        <gutalk-index></gutalk-index>
+    </div>
+    <template id="index">
         <el-container style="height: 100%;">
             <el-header style="margin-top: 3%; margin-left: 15%; margin-right: 15%;">
                 <el-image style="height: 100%;" src="img/gutalk.gif"></el-image>
@@ -40,9 +43,9 @@
                                             <el-link :underline="false" style="font-size: 18px;"
                                                 :href="`/issue/?id=${i.number}`">
                                                 {{ i.title }} </el-link>
-                                            <el-tag v-for="j in i.labels" size="small"
+                                            <el-tag v-for="j in i.labels" size="small" round
                                                 style="margin-left: 5px; vertical-align: bottom;" type="info"
-                                                :color="`#${j.color}`" round> {{ j.name }} </el-tag>
+                                                :color="`#${j.color}`"> {{ j.name }} </el-tag>
                                         </div>
                                         <div style="font-size: 14px; margin-top: 36px;">
                                             <span> {{ i.comments }}个回答 {{ new Date(i.updated_at).toLocaleString() }}
@@ -55,7 +58,7 @@
                         </el-scrollbar>
                     </el-col>
                     <el-col :span="6">
-                        <el-card shadow="hover" style="margin: 10px;">
+                        <el-card shadow="hover" style="margin: 10px;" v-loading="!user">
                             <div v-if="!isLogin">
                                 <el-alert title="你还没有登录" show-icon style="margin-bottom: 10px;">
                                     登录以获取更好的体验
@@ -94,7 +97,7 @@
                 <el-button type="primary" @click="login">登录</el-button>
             </template>
         </el-dialog>
-    </div>
+    </template>
     <script src="index.js"></script>
 </body>
 
