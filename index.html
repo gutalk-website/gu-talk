@@ -36,11 +36,17 @@
                                             {{ i.user.login }} </div>
                                     </div>
                                     <div style="margin-left: 15px; display: inline-block; vertical-align: top;">
-                                        <el-link :underline="false" style="font-size: 18px;"
-                                            :href="`/issue/?id=${i.number}`">
-                                            {{ i.title }} </el-link>
+                                        <div>
+                                            <el-link :underline="false" style="font-size: 18px;"
+                                                :href="`/issue/?id=${i.number}`">
+                                                {{ i.title }} </el-link>
+                                            <el-tag v-for="j in i.labels" size="small"
+                                                style="margin-left: 5px; vertical-align: bottom;" type="info"
+                                                :color="`#${j.color}`" round> {{ j.name }} </el-tag>
+                                        </div>
                                         <div style="font-size: 14px; margin-top: 36px;">
-                                            <span> {{ i.comments }}个回答 {{ new Date(i.updated_at).toLocaleString() }} </span><br>
+                                            <span> {{ i.comments }}个回答 {{ new Date(i.updated_at).toLocaleString() }}
+                                            </span><br>
                                         </div>
                                     </div>
                                 </el-card>
