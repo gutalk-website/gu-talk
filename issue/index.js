@@ -9,9 +9,57 @@ if (accessToken != undefined) {
 }
 const app = Vue.createApp({});
 app.use(ElementPlus);
+for (let i in ElementPlusIconsVue) {
+    app.component(i, ElementPlusIconsVue[i]);
+    //console.log(ElementPlusIconsVue[i]);
+}
+app.use(VueMarkdown);
+app.component('md-editor', {
+    data() {
+        return {
+            content: '',
+            view: ''
+        }
+    },
+    emits: ['submit'],
+    methods: {
+        header() {
+            this.content += '### 标题';
+        },
+        bold() {
+            this.content += '**加粗**';
+        },
+        italic() {
+            this.content += '_斜体_';
+        },
+        ref() {
+            this.content += '> 引用';
+        },
+        code() {
+            this.content += '```\n代码\n```';
+        },
+        list() {
+            this.content += '- 列表项\n- 列表项\n- 列表项';
+        },
+        link() {
+            this.content += '[文字](链接)';
+        },
+        img() {
+            this.content += '![](图片链接)';
+        },
+        preview() {
+            this.view = marked.parse(this.content);
+        },
+        submit() {
+            this.$emit('submit');
+        }
+    },
+    template: '#mdeditor'
+});
 app.component('gutalk-issue', {
     data() {
         return {
+            isLogin: accessToken != undefined,
             content: false,
             comments: false
         }
@@ -19,7 +67,10 @@ app.component('gutalk-issue', {
     mounted() {
         let params = (new URL(document.location)).searchParams;
         if (accessToken != undefined) {
-            axios.get('https://api.github.com/user').catch((err) => {
+            axios.get('https://api.github.com/user').then(() => {
+                this.isLogin = true;
+            }).catch((err) => {
+                this.isLogin = false;
                 localStorage.removeItem('github-token');
                 delete axios.defaults.headers.common['Authorization'];
                 ElementPlus.ElMessage.error(`登录信息无效：${err}`);
@@ -39,6 +90,9 @@ app.component('gutalk-issue', {
     methods: {
         marked(str) {
             return str == null ? '' : marked.parse(str);
+        },
+        comment() {
+            ElementPlus.ElMessage.success('ok');
         }
     },
     template: '#issue'
