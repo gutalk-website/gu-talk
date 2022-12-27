@@ -3,11 +3,8 @@ marked.setOptions({
         return hljs.highlightAuto(code).value;
     }
 });
-axios.defaults.headers.common['Cache-Control'] = 'no-cache';
 const accessToken = localStorage.getItem('github-token');
-if (accessToken != undefined) {
-    axios.defaults.headers.common['Authorization'] = accessToken;
-}
+axios.defaults.headers.common['Authorization'] = accessToken;
 const issueId = (new URL(document.location)).searchParams.get('id');
 const app = Vue.createApp({});
 app.use(ElementPlus);
@@ -26,23 +23,18 @@ app.component('gutalk-newissue', {
         }
     },
     mounted() {
-        if (accessToken != undefined) {
-            axios.get('https://api.github.com/user').then(() => {
-                this.isLogin = true;
-            }).catch((err) => {
-                this.isLogin = false;
-                localStorage.removeItem('github-token');
-                delete axios.defaults.headers.common['Authorization'];
-                ElementPlus.ElMessage.error(`登录信息无效：${err}`);
-            });
-        }
-        axios.get('https://api.github.com/repos/gutalk-website/issue-repo/labels').then((res) => {
-            this.tags = res.data;
+        axios.get('https://api.github.com/user').then(() => {
+            this.isLogin = true;
         }).catch((err) => {
             this.isLogin = false;
             localStorage.removeItem('github-token');
             delete axios.defaults.headers.common['Authorization'];
             ElementPlus.ElMessage.error(`登录信息无效：${err}`);
+        });
+        axios.get('https://api.github.com/repos/gutalk-website/issue-repo/labels').then((res) => {
+            this.tags = res.data;
+        }).catch((err) => {
+            ElementPlus.ElMessage.error(`获取数据失败：${err}`);
         });
     },
     methods: {
