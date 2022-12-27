@@ -29,6 +29,13 @@
             </el-header>
             <el-main style="margin-bottom: 5%; margin-left: 15%; margin-right: 15%; height: 100%;">
                 <el-scrollbar style="height: 100%;">
+                    <div v-if="content!=false" style="margin: 10px;">
+                        <el-alert v-if="content.state=='closed'" type="warning" :closable="false">
+                            <template #title>
+                                这个帖子在 {{ new Date(content.closed_at).toLocaleString() }} 关闭了
+                            </template>
+                        </el-alert>
+                    </div>
                     <el-card shadow="hover" style="margin: 10px;" v-loading="!content">
                         <template #header>
                             <div style="font-size: 18px; display: inline-block;"> {{ content.title }} </div>
