@@ -61,7 +61,7 @@
                             </div>
                         </el-card>
                     </div>
-                    <div v-if="isLogin&&content!=false&&comments!=false" style="margin: 10px; margin-top: 25px;">
+                    <div v-if="isLogin&&content!=false" style="margin: 10px; margin-top: 25px;">
                         <md-editor ref="editor" :rows="6" :loading="commenting" @submit="comment"></md-editor>
                     </div>
                 </el-scrollbar>
