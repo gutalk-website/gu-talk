@@ -19,7 +19,6 @@ app.component('gutalk-editissue', {
             loading: true,
             user: '',
             title: '',
-            content: '',
             closed: undefined,
             commenting: false
         }
@@ -36,7 +35,7 @@ app.component('gutalk-editissue', {
         axios.get(`https://api.github.com/repos/gutalk-website/issue-repo/issues/${issueId}`).then((res) => {
             this.loading = false;
             this.title = res.data.title;
-            this.content = res.data.body;
+            this.$refs.editor.set(res.data.body);
             this.closed = res.data.state == 'closed';
         }).catch((err) => {
             ElementPlus.ElMessage.error(`获取数据失败：${err}`);

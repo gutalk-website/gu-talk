@@ -7,7 +7,7 @@ MarkdownEditor = {
     },
     props: ['loading', 'rows'],
     emits: ['submit'],
-    expose: ['clear'],
+    expose: ['clear', 'set'],
     methods: {
         header() {
             this.content += '### 标题';
@@ -41,6 +41,9 @@ MarkdownEditor = {
         },
         clear() {
             this.content = '';
+        },
+        set(str) {
+            this.content = str;
         }
     },
     template: `
