@@ -32,12 +32,6 @@
                     <div style="padding-right: 20.5px;">
                         <el-input v-model="title" placeholder="标题" style="margin: 10px; margin-bottom: 5px;"></el-input>
                     </div>
-                    <div>
-                        <el-check-tag v-for="i in tags" :checked="i['checked']" :color="`#${i.color}`"
-                            @change="(is) => i['checked']=is"
-                            style="margin-left: 10px; margin-top: 5px; margin-bottom: 5px;">
-                            {{ i.name }} </el-check-tag>
-                    </div>
                     <md-editor @submit="comment" :loading="commenting" :rows="18"
                         style="margin: 10px; margin-top: 5px;"></md-editor>
                 </el-scrollbar>

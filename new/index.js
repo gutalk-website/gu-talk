@@ -17,7 +17,6 @@ app.component('gutalk-newissue', {
         return {
             isLogin: accessToken != undefined,
             title: '',
-            tags: [],
             content: '',
             commenting: false
         }
@@ -31,11 +30,6 @@ app.component('gutalk-newissue', {
             delete axios.defaults.headers.common['Authorization'];
             ElementPlus.ElMessage.error(`登录信息无效：${err}`);
         });
-        axios.get('https://api.github.com/repos/gutalk-website/issue-repo/labels').then((res) => {
-            this.tags = res.data;
-        }).catch((err) => {
-            ElementPlus.ElMessage.error(`获取数据失败：${err}`);
-        });
     },
     methods: {
         marked(str) {
@@ -46,12 +40,7 @@ app.component('gutalk-newissue', {
                 ElementPlus.ElMessage.error(`标题不能为空！`);
                 return;
             }
-            let json = { 'title': this.title, 'body': str, 'labels': [] };
-            for (let i in this.tags) {
-                if (this.tags[i]['checked'] == true) {
-                    json.labels.push(this.tags[i].name);
-                }
-            }
+            let json = { 'title': this.title, 'body': str };
             this.commenting = true;
             axios.post(
                 `https://api.github.com/repos/gutalk-website/issue-repo/issues`, json
