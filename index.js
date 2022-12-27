@@ -63,6 +63,9 @@ app.component('gutalk-index', {
                         ElementPlus.ElMessage.error(`获取列表失败：${err}`);
                     });
             }
+        },
+        newIssue() {
+            window.open('/new/');
         }
     },
     template: '#index'
