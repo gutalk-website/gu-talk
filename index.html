@@ -31,7 +31,7 @@
                             </div>
                             <div v-infinite-scroll="getPage">
                                 <el-card shadow="hover" style="margin: 10px;" v-for="i in list">
-                                    <div style="width: 56px; display: inline-block;">
+                                    <div style="width: 56px; display: inline-block; overflow: hidden;">
                                         <el-avatar style="display: block; margin-right: auto;" size="large"
                                             :src="i.user.avatar_url"></el-avatar>
                                         <div
@@ -58,6 +58,9 @@
                         </el-scrollbar>
                     </el-col>
                     <el-col :span="6">
+                        <el-card v-if="isLogin" shadow="hover" style="margin: 10px;">
+                            <el-button @click="newIssue" size="large" style="width: 100%;">我要发帖</el-button>
+                        </el-card>
                         <el-card shadow="hover" style="margin: 10px;" v-loading="!user&&isLogin">
                             <div v-if="!isLogin">
                                 <el-alert title="你还没有登录" show-icon style="margin-bottom: 10px;">
