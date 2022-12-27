@@ -13,7 +13,7 @@
         rel="stylesheet">
     <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
     <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.6.0/styles/github.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcdn.net/ajax/libs/vue-markdown/2.2.4/vue-markdown.min.js"></script>
+    <script src="../markdown.js"></script>
     <title>GuTalk</title>
     <base target="_blank">
 </head>
@@ -62,49 +62,11 @@
                         </el-card>
                     </div>
                     <div v-if="isLogin&&content!=false&&comments!=false" style="margin: 10px; margin-top: 25px;">
-                        <md-editor @submit="comment"></md-editor>
+                        <md-editor ref="editor" :rows="6" :loading="commenting" @submit="comment"></md-editor>
                     </div>
                 </el-scrollbar>
             </el-main>
         </el-container>
-    </template>
-    <template id="mdeditor">
-        <el-tabs @tab-change="preview" type="border-card">
-            <el-tab-pane label="编辑">
-                <el-input v-model="content" :autosize="{ minRows: 5, maxRows: 10 }" type="textarea"
-                    placeholder="Markdown..." input-style="font-family: Droid Sans Mono;"></el-input>
-            </el-tab-pane>
-            <el-tab-pane label="预览">
-                <div style="margin: 3px; margin-bottom: 10px;" class="markdown-body" v-html="view"></div>
-            </el-tab-pane>
-            <el-button-group style="margin-top: 5px;">
-                <el-tooltip content="标题" placement="top">
-                    <el-button @click="header"><strong>Ｈ</strong></el-button>
-                </el-tooltip>
-                <el-tooltip content="加粗" placement="top">
-                    <el-button @click="bold"><strong>Ｂ</strong></el-button>
-                </el-tooltip>
-                <el-tooltip content="斜体" placement="top">
-                    <el-button @click="italic" style="font-style: italic;">B</el-button>
-                </el-tooltip>
-                <el-tooltip content="引用" placement="top">
-                    <el-button @click="ref" icon="Expand"></el-button>
-                </el-tooltip>
-                <el-tooltip content="代码" placement="top">
-                    <el-button @click="code" icon="Edit"></el-button>
-                </el-tooltip>
-                <el-tooltip content="列表" placement="top">
-                    <el-button @click="list" icon="List"></el-button>
-                </el-tooltip>
-                <el-tooltip content="链接" placement="top">
-                    <el-button @click="link" icon="Link"></el-button>
-                </el-tooltip>
-                <el-tooltip content="图片" placement="top">
-                    <el-button @click="img" icon="Picture"></el-button>
-                </el-tooltip>
-            </el-button-group>
-            <el-button @click="submit" style="margin-top: 5px; float: right;" type="primary" round>提交</el-button>
-        </el-tabs>
     </template>
     <script src="index.js"></script>
 </body>
