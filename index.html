@@ -58,7 +58,7 @@
                         </el-scrollbar>
                     </el-col>
                     <el-col :span="6">
-                        <el-card shadow="hover" style="margin: 10px;" v-loading="!user">
+                        <el-card shadow="hover" style="margin: 10px;" v-loading="!user&&isLogin">
                             <div v-if="!isLogin">
                                 <el-alert title="你还没有登录" show-icon style="margin-bottom: 10px;">
                                     登录以获取更好的体验
