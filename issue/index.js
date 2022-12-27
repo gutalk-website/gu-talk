@@ -3,6 +3,7 @@ marked.setOptions({
         return hljs.highlightAuto(code).value;
     }
 });
+axios.defaults.headers.common['Cache-Control'] = 'no-cache';
 const accessToken = localStorage.getItem('github-token');
 if (accessToken != undefined) {
     axios.defaults.headers.common['Authorization'] = accessToken;
