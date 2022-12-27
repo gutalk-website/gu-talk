@@ -21,6 +21,10 @@ app.component('gutalk-index', {
             axios.get('https://api.github.com/user').then((res) => {
                 this.user = res.data;
                 this.isLogin = true;
+                localStorage.setItem('username', res.data.login);
+                if (admins.indexOf(res.data.login) != -1) {
+                    localStorage.setItem('isAdmin', 'true');
+                }
             }).catch((err) => {
                 this.isLogin = false;
                 localStorage.removeItem('github-token');

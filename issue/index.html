@@ -29,12 +29,20 @@
             </el-header>
             <el-main style="margin-bottom: 5%; margin-left: 15%; margin-right: 15%; height: 100%;">
                 <el-scrollbar style="height: 100%;">
+                    <div v-if="content!=false" style="margin: 10px;">
+                        <el-alert v-if="content.state=='closed'" type="warning" :closable="false">
+                            <template #title>
+                                这个帖子在 {{ new Date(content.closed_at).toLocaleString() }} 关闭了
+                            </template>
+                        </el-alert>
+                    </div>
                     <el-card shadow="hover" style="margin: 10px;" v-loading="!content">
                         <template #header>
                             <div style="font-size: 18px; display: inline-block;"> {{ content.title }} </div>
                             <el-tag v-for="j in content.labels" size="small" round
                                 style="margin-left: 5px; vertical-align: bottom;" type="info" :color="`#${j.color}`">
                                 {{ j.name }} </el-tag>
+                            <el-button v-if="isAdmin||user==myUsername" @click="edit">编辑</el-button>
                         </template>
                         <div v-if="content!=false">
                             <div style="width: 56px; display: inline-block;">

@@ -18,6 +18,9 @@ app.component('gutalk-issue', {
     data() {
         return {
             isLogin: accessToken != undefined,
+            isAdmin: localStorage.getItem('isAdmin'),
+            myUsername: localStorage.getItem('username'),
+            user: '',
             content: false,
             comments: false,
             commenting: false
@@ -36,6 +39,7 @@ app.component('gutalk-issue', {
         }
         axios.get(`https://api.github.com/repos/gutalk-website/issue-repo/issues/${issueId}`).then((res) => {
             this.content = res.data;
+            this.user = res.data.user.login;
         }).catch((err) => {
             ElementPlus.ElMessage.error(`获取数据失败：${err}`);
         });
@@ -63,6 +67,9 @@ app.component('gutalk-issue', {
                 ElementPlus.ElMessage.error(`提交失败：${err}`);
                 this.commenting = false;
             });
+        },
+        edit() {
+            window.open(`/edit/?id=${issueId}`);
         }
     },
     template: '#issue'
