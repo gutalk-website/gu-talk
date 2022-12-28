@@ -69,7 +69,7 @@ app.component('gutalk-issue', {
             });
         },
         edit() {
-            window.open(`/edit/?id=${issueId}`);
+            location.href = `/edit/?id=${issueId}`;
         }
     },
     template: '#issue'
