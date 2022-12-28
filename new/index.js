@@ -23,9 +23,8 @@ app.component('gutalk-newissue', {
     mounted() {
         axios.get('https://api.github.com/user').then(() => {
             this.isLogin = true;
-        }).catch((err) => {
+        }).catch(() => {
             this.isLogin = false;
-            localStorage.removeItem('github-token');
             delete axios.defaults.headers.common['Authorization'];
             ElementPlus.ElMessage.error(`登录信息无效：${err}`);
         });

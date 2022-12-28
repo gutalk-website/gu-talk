@@ -46,6 +46,9 @@
                                             <el-link :underline="false" style="font-size: 18px;"
                                                 :href="`/issue/?id=${i.number}`">
                                                 {{ i.title }} </el-link>
+                                            <el-icon v-if="i.locked" style="margin-left: 3px;" color="orange">
+                                                <Lock />
+                                            </el-icon>
                                             <el-tag v-for="j in i.labels" size="small" round
                                                 style="margin-left: 5px; vertical-align: bottom;" type="info"
                                                 :color="`#${j.color}`"> {{ j.name }} </el-tag>

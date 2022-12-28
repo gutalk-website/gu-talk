@@ -41,11 +41,19 @@
                     <el-card shadow="hover" style="margin: 10px;" v-loading="!content">
                         <template #header>
                             <div style="font-size: 18px; display: inline-block;"> {{ content.title }} </div>
+                            <el-icon v-if="content.locked" style="margin-left: 3px;" color="orange">
+                                <Lock />
+                            </el-icon>
                             <el-tag v-for="j in content.labels" size="small" round
                                 style="margin-left: 5px; vertical-align: bottom;" type="info" :color="`#${j.color}`">
                                 {{ j.name }} </el-tag>
                             <el-button v-if="isAdmin||user==myUsername" @click="edit"
                                 style="float: right;">编辑</el-button>
+                            <div v-if="isAdmin" style="float: right;">
+                                <el-button @click="lock" :loading="locking">
+                                    {{ content.locked?'解锁':'锁定' }}
+                                </el-button>
+                            </div>
                         </template>
                         <div v-if="content!=false">
                             <div style="width: 56px; display: inline-block;">

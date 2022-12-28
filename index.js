@@ -24,12 +24,12 @@ app.component('gutalk-index', {
                 localStorage.setItem('username', res.data.login);
                 if (admins.indexOf(res.data.login) != -1) {
                     localStorage.setItem('isAdmin', 'true');
+                } else {
+                    localStorage.removeItem('isAdmin');
                 }
-            }).catch((err) => {
+            }).catch(() => {
                 this.isLogin = false;
-                localStorage.removeItem('github-token');
                 delete axios.defaults.headers.common['Authorization'];
-                ElementPlus.ElMessage.error(`登录信息无效：${err}`);
             });
         }
     },

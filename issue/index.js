@@ -23,18 +23,17 @@ app.component('gutalk-issue', {
             user: '',
             content: false,
             comments: false,
-            commenting: false
+            commenting: false,
+            locking: false,
         }
     },
     mounted() {
         if (accessToken != undefined) {
             axios.get('https://api.github.com/user').then(() => {
                 this.isLogin = true;
-            }).catch((err) => {
+            }).catch(() => {
                 this.isLogin = false;
-                localStorage.removeItem('github-token');
                 delete axios.defaults.headers.common['Authorization'];
-                ElementPlus.ElMessage.error(`登录信息无效：${err}`);
             });
         }
         axios.get(`https://api.github.com/repos/gutalk-website/issue-repo/issues/${issueId}`).then((res) => {
@@ -70,6 +69,19 @@ app.component('gutalk-issue', {
         },
         edit() {
             location.href = `/edit/?id=${issueId}`;
+        },
+        lock() {
+            this.locking = true;
+            axios[this.content.locked ? 'delete' : 'put'](
+                `https://api.github.com/repos/gutalk-website/issue-repo/issues/${issueId}/lock`,
+            ).then(() => {
+                ElementPlus.ElMessage.success('操作成功！');
+                this.locking = false;
+                location.reload();
+            }).catch((err) => {
+                ElementPlus.ElMessage.error(`操作失败：${err}`);
+                this.locking = false;
+            });
         }
     },
     template: '#issue'
