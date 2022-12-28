@@ -25,7 +25,9 @@
     <template id="issue">
         <el-container style="height: 100%;">
             <el-header style="margin-top: 3%; margin-left: 15%; margin-right: 15%;">
-                <el-image style="height: 100%;" src="../img/gutalk.gif"></el-image>
+                <a href="https://gutalk.netlify.app/">
+                    <el-image style="height: 100%;" src="img/gutalk.gif"></el-image>
+                </a>
             </el-header>
             <el-main style="margin-bottom: 5%; margin-left: 15%; margin-right: 15%; height: 100%;">
                 <el-scrollbar style="height: 100%;">
@@ -50,7 +52,7 @@
                                 <el-avatar style="display: block; margin-right: auto;" size="large"
                                     :src="content.user.avatar_url"></el-avatar>
                                 <div
-                                    style="overflow: hidden; font-size: 14px; text-align: center; margin: auto; margin-top: 5px;">
+                                    style="overflow: hidden; font-size: 14px; word-wrap: break-word; text-align: center; margin: auto; margin-top: 5px;">
                                     {{ content.user.login }} </div>
                             </div>
                             <div
@@ -64,7 +66,8 @@
                             <div style="width: 56px; display: inline-block; overflow: hidden;">
                                 <el-avatar style="display: block; margin-right: auto;" size="large"
                                     :src="i.user.avatar_url"></el-avatar>
-                                <div style="font-size: 14px; text-align: center; margin: auto; margin-top: 5px;">
+                                <div
+                                    style="font-size: 14px; word-wrap: break-word; text-align: center; margin: auto; margin-top: 5px;">
                                     {{ i.user.login }} </div>
                             </div>
                             <div
