@@ -53,7 +53,8 @@
                                     style="overflow: hidden; font-size: 14px; text-align: center; margin: auto; margin-top: 5px;">
                                     {{ content.user.login }} </div>
                             </div>
-                            <div style="margin-left: 15px; display: inline-block; vertical-align: top;">
+                            <div
+                                style="margin-left: 15px; max-width: calc(100% - 72px); display: inline-block; vertical-align: top;">
                                 <div class="markdown-body" v-html="marked(content.body)"></div>
                             </div>
                         </div>
@@ -66,7 +67,8 @@
                                 <div style="font-size: 14px; text-align: center; margin: auto; margin-top: 5px;">
                                     {{ i.user.login }} </div>
                             </div>
-                            <div style="margin-left: 15px; display: inline-block; vertical-align: top;">
+                            <div
+                                style="margin-left: 15px; max-width: calc(100% - 72px); display: inline-block; vertical-align: top;">
                                 <div class="markdown-body" v-html="marked(i.body)"></div>
                             </div>
                         </el-card>
