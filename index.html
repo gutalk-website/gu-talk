@@ -6,6 +6,7 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.45/vue.global.prod.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/element-plus/2.2.27/index.full.min.js"></script>
     <link href="https://cdn.bootcdn.net/ajax/libs/element-plus/2.2.27/index.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-plus-icons-vue/2.0.10/index.iife.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.1/axios.min.js"></script>
     <script src="admin.js"></script>
     <title>GuTalk</title>
@@ -46,11 +47,12 @@
                                             <el-link :underline="false" style="font-size: 18px;"
                                                 :href="`/issue/?id=${i.number}`">
                                                 {{ i.title }} </el-link>
-                                            <el-icon v-if="i.locked" style="margin-left: 3px;" color="orange">
+                                            <el-icon style="margin-left: 3px; vertical-align: middle;" v-if="i.locked"
+                                                color="orange">
                                                 <Lock />
                                             </el-icon>
                                             <el-tag v-for="j in i.labels" size="small" round
-                                                style="margin-left: 5px; vertical-align: bottom;" type="info"
+                                                style="margin-left: 5px; vertical-align: middle;" type="info"
                                                 :color="`#${j.color}`"> {{ j.name }} </el-tag>
                                         </div>
                                         <div style="font-size: 14px; margin-top: 36px;">

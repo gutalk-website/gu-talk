@@ -4,6 +4,9 @@ if (accessToken != undefined) {
 }
 const app = Vue.createApp({});
 app.use(ElementPlus);
+for (let i in ElementPlusIconsVue) {
+    app.component(i, ElementPlusIconsVue[i]);
+}
 app.component('gutalk-index', {
     data() {
         return {
