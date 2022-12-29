@@ -145,7 +145,7 @@ MarkdownEditor = {
                     break;
                 }
             }
-            if (file) {
+            if (file && this.repo && this.branch) {
                 this.pasteImgLoading = true;
                 let reader = new FileReader();
                 reader.readAsDataURL(file);
