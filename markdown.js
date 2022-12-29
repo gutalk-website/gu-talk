@@ -137,7 +137,6 @@ MarkdownEditor = {
             };
         },
         paste(e) {
-            this.pasteImgLoading = true;
             let items = e.clipboardData.items;
             let file = null;
             for (let i = 0; i < items.length; i++) {
@@ -147,6 +146,7 @@ MarkdownEditor = {
                 }
             }
             if (file) {
+                this.pasteImgLoading = true;
                 let reader = new FileReader();
                 reader.readAsDataURL(file);
                 reader.onload = () => {
