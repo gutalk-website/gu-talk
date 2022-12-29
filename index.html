@@ -66,7 +66,7 @@
                         </el-scrollbar>
                     </el-col>
                     <el-col :span="6">
-                        <el-card shadow="hover" style="margin: 10px;">
+                        <el-card v-if="isLogin" shadow="hover" style="margin: 10px;">
                             <el-button @click="newIssue" size="large" style="width: 100%;">我要发帖</el-button>
                             <el-link href="https://gutalk.netlify.app/issue/?id=2"
                                 style="margin-top: 5px; margin-left: 1px;">请先阅读发帖规范</el-link>
