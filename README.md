@@ -1,6 +1,6 @@
-# guTalk
+# gutalk
 
-An experimental project
+一个基于issues实现的（简易）论坛系统
 
 ```text
                    _ooOoo_
