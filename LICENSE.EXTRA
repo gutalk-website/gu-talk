@@ -1,0 +1,8 @@
+
+本仓库基于GPLv3许可证（全文于LICENSE文件）开放源代码。但作为一个网站项目，对修改的代码有以下额外规定：
+
+1. 基于本仓库代码修改的单独项目必须使用与原项目名（gutalk）有一定区分度的名称
+
+2. 基于本仓库代码修改的单独项目必须自行部署 /loginwithtoken/index.html 内的API地址，不得使用本项目网站所部署的API（https://gutalk.netlify.app/.netlify/functions/signin）
+   在netlify部署API所需javascript代码位于 /.netlify/functions/signin.js
+
