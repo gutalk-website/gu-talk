@@ -1,7 +1,0 @@
-
-本仓库基于GPLv3许可证（全文于LICENSE文件）开放源代码。但作为一个网站项目，对修改的代码有以下额外规定：
-
-1. 基于本仓库代码修改的单独项目不得使用以下API地址：
-   - https://github.com/login/oauth/authorize?client_id=592223f26d426d6b7141&scope=public_repo
-   - https://gutalk.netlify.app/.netlify/functions/signin
-
