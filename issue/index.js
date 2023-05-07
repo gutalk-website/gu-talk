@@ -39,6 +39,7 @@ app.component('gutalk-issue', {
         axios.get(`https://api.github.com/repos/gutalk-website/issue-repo/issues/${issueId}`).then((res) => {
             this.content = res.data;
             this.user = res.data.user.login;
+            document.title = `${res.data.title} - GuTalk`;
         }).catch((err) => {
             ElementPlus.ElMessage.error(`获取数据失败：${err}`);
         });
